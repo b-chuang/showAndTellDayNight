@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Day & Night</title>
+
+    <style>
+        article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary{display:block;}audio,canvas,video{display:inline-block;}audio:not([controls]){display:none;height:0;}[hidden]{display:none;}html{font-family:sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;}a:focus{outline:thin dotted;}a:active,a:hover{outline:0;}h1{font-size:2em;}abbr[title]{border-bottom:1px dotted;}b,strong{font-weight:700;}dfn{font-style:italic;}mark{background:#ff0;color:#000;}code,kbd,pre,samp{font-family:monospace, serif;font-size:1em;}pre{white-space:pre-wrap;word-wrap:break-word;}q{quotes:\201C \201D \2018 \2019;}small{font-size:80%;}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline;}sup{top:-.5em;}sub{bottom:-.25em;}img{border:0;}svg:not(:root){overflow:hidden;}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em;}button,input,select,textarea{font-family:inherit;font-size:100%;margin:0;}button,input{line-height:normal;}button,html input[type=button],/* 1 */input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer;}button[disabled],input[disabled]{cursor:default;}input[type=checkbox],input[type=radio]{box-sizing:border-box;padding:0;}input[type=search]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;}input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration{-webkit-appearance:none;}textarea{overflow:auto;vertical-align:top;}table{border-collapse:collapse;border-spacing:0;}body,figure{margin:0;}legend,button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0;}
+        
+        .clearfix:after {visibility: hidden; display: block; font-size: 0; content: ''; clear: both; height: 0; }
+        
+        * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+
+        CODE PEN EXAMPLES
+        https://codepen.io/jesperkc/pen/pydMqb
+        https://codepen.io/jojogirl/pen/NxvZBy
+        
+        SESSIONSTORAGE EXAMPLE
+        https://blog.webjeda.com/demo/dark-theme-switch/
+
+    
+        li {
+            list-style: none;
+        }
+
+        section {
+            position: relative;
+            height: 100vh;
+            background:#E9F5EC;
+        }
+
+        .sectionHeader {
+            width: 100%;
+            background-color: #434646;
+            padding: 20px 0;
+            color: white;
+            text-align: center;
+            text-transform: uppercase;
+            margin: 0;
+            letter-spacing: 5px;
+            font-weight: 700;
+            font-family: Helvetica, sans-serif, arial;
+        }
+
+
+        #title {
+            height: 100vh;
+        }
+
+      #titleContainer {
+            position: absolute;
+            width: 100%;
+            top: 30%;
+            text-align: center;
+        }
+
+       /*   #title h1 {
+            font-size: 40px;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 15px;
+            background-color: tomato;
+            padding: 10px 0;
+            font-weight: 700;
+        }
+
+        #title h2 {
+            text-transform: uppercase;
+            font-size: 25px;
+            letter-spacing: 10px;
+            margin-top: -20px;
+            font-weight: 100;
+            color: #f16828;
+        }  */
+
+        .link a{
+            position: absolute;
+            left:0;
+            bottom: 0;
+            width: 100%;
+            background: #434646;
+            padding: 20px 0;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            font-stretch: 200%;
+            margin:0 auto;
+            border-bottom: 1px whitesmoke solid;
+        
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .link a:hover {
+            background: #a5a5a5;
+            
+        }
+
+        #intro {
+            height: 100vh;
+        }
+
+        #lexus {
+            width: 100%;
+            height: calc(100vh - 100px);
+        }
+
+        .nightMeme {
+            margin:0 auto;
+            max-width: 94%;
+            display:flex;
+            flex:1;
+            top:20%;
+            margin-left:3%;
+            margin-top:3%;
+        }
+
+
+/* FLICKITY CAROSEL HEIGHT
+        .carousel-cell {
+        width: 100%; /* full width */
+        /* height: 160px; /* height of carousel
+        margin-right: 10px;
+        } */
+
+        
+/* // daynight intro */
+
+        @import url(https://fonts.googleapis.com/css?family=Lato);
+
+        #info {
+        position: absolute;
+        left: 5%;
+        }
+        body {
+        padding: 0;
+            margin: 0;
+            font-family: 'Lato';
+        text-align: center;
+        }
+        .section {
+            padding-top: 40px;
+            font-size: 1em;
+            text-align: center;
+            background: #f1ede3;
+            width: 100%;
+            height: 800px;
+            color: #555;
+        
+            -webkit-transition: background 0.5s ease-in-out;
+                transition: background 0.5s ease-in-out;
+        }
+        .night .section {
+            background: #080d17;
+        color: #e9e5d5;
+        }
+
+
+        .night #intro-text {
+            color: #e9e5d5;
+        }
+
+        #thankYou {
+            margin-top:"40%";
+            font-size:150px;
+            display:inline-block;
+           
+        }
+
+        .time-circle {
+        position: relative;
+        background: linear-gradient(to bottom, #BE4405, #F6C60C);
+        width: 400px;
+        height: 400px;
+        border-radius: 50%;
+        border: 4.5px solid #555;
+        overflow: hidden;
+        padding: 0px;
+        margin: 0 auto;
+        margin-bottom: 10px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.4);
+        text-align: center;
+
+        -webkit-transition: all 1.1s ease-in-out;
+                transition: all 1.1s ease-in-out;
+        }
+        .night .time-circle{
+        background: linear-gradient(to bottom, #111936, #285A7B);
+        border-color: #e9e5d5;
+        }
+        .sun {
+        margin-top: 20px;
+        background: #F2EF88;
+        box-shadow: 0 0 20px rgba(242, 239, 136, 0.4);
+        width: 30%;
+        height: 30%;
+        border-radius: 50%;
+        position: relative;
+        left: 35%;
+        top: 48%;
+
+        -webkit-animation: pulse 5s ease infinite alternate;
+            animation: pulse 5s ease infinite alternate;
+        -webkit-transition: all 1.1s 0.4s ease;
+                transition: all 1.1s 0.4s ease;
+        }
+        @keyframes pulse {
+            0% {box-shadow: 0 0 20px rgba(242, 239, 136, 0.4);}
+            50% {box-shadow: 0 0 40px rgba(242, 239, 136, 1);}
+            100% {box-shadow: 0 0 20px rgba(242, 239, 136, 0.4);}
+        }
+        @-webkit-keyframes pulse {
+            0% {box-shadow: 0 0 20px rgba(242, 239, 136, 0.4);}
+            50% {box-shadow: 0 0 40px rgba(242, 239, 136, 1);}
+            100% {box-shadow: 0 0 20px rgba(242, 239, 136, 0.4);}
+        }
+        .night .sun {
+        top: 70%;
+        left: 20%;
+
+        -webkit-transition: all 1.1s 0s ease;
+                transition: all 1.1s 0s ease;
+        }
+        .moon {
+        position: absolute;
+        margin-top: 20px;
+        background: #d9d8d0;
+        box-shadow: inset -10px 2px 0 0px #899098;
+        width: 22.5%;
+        height: 22.5%;
+        border-radius: 100%;
+        position: relative;
+        left: 120%;
+        margin-left: -50px;
+        top: -50%;
+        overflow: hidden;
+
+        -webkit-transition: all 1.1s 0s ease;
+                transition: all 1.1s 0s ease;
+        }
+        .night .moon {
+        left: 65%;
+        top: -10%;
+
+        -webkit-transition: all 1.1s 0.4s ease;
+                transition: all 1.1s 0.4s ease;
+        }
+        .moon div:nth-child(n) {
+        position: relative;
+        background: #b9b8b0;
+        border-radius: 50%;
+        box-shadow: inset 4px -2px 0 0px #535457;
+        }
+        .moon div:nth-child(1) {
+        top: 25%;
+        left: 12%;
+        width: 27%;
+        height: 27%;
+        }
+        .moon div:nth-child(2) {
+        top: -11%;
+        left: 60%;
+        width: 16%;
+        height: 16%;
+        }
+        .moon div:nth-child(3) {
+        top: 25%;
+        left: 44%;
+        width: 16%;
+        height: 16%;
+        }
+        .stars {
+        opacity: 0;
+        margin-left: 100px;
+        top: 0;
+        left: 0;
+        -webkit-transition: all 0.8s 0s ease;
+                transition: all 0.8s 0s ease;
+        z-index: 1000;
+        }
+        .night .stars {
+        opacity: 1;
+
+        -webkit-transition: all 3s 0.4s ease;
+                transition: all 3s 0.4s ease;
+        }
+        .stars div:nth-child(n) {
+        position: absolute;
+        background: radial-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+        border-radius: 50%;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 1);
+        overflow: hidden;
+        width: 0.4%;
+        height: 0.4%;
+
+        margin-left: 20%;
+        margin-top: -20%;
+
+        -webkit-transition: all 1s 0s ease;
+                transition: all 1s 0s ease;
+        }
+        .night .stars div:nth-child(n) {
+        margin-left: 0;
+        margin-top: 0;
+
+        -webkit-transition: all 1s 0.4s ease-out;
+                transition: all 1s 0.4s ease-out;  
+        }
+        .stars div:nth-child(1) {
+        left: 25%;
+        top: 30%;
+        }
+        .stars div:nth-child(2) {
+        left: 55%;
+        top: 20%;
+        }
+        .stars div:nth-child(3) {
+        left: 60%;
+        top: 60%;
+        }
+        .stars div:nth-child(4) {
+        left: 40%;
+        top: 45%;
+        }
+        .stars div:nth-child(5) {
+        left: 15%;
+        top: 55%;
+        }
+        .stars div:nth-child(6) {
+        left: 40%;
+        top: 10%;
+        }
+        .stars div:nth-child(7) {
+        left: 80%;
+        top: 55%;
+        }
+        .water {
+        position: absolute;
+        background: repeating-radial-gradient(ellipse farthest-corner at center -400%, #f5c30e 30%, #518eac 90%) repeat scroll 0 0 #518eac;
+        width: 100%;
+        height: 200px;
+        top: 68%;
+
+        -webkit-transition: all 1.1s ease;
+                transition: all 1.1s ease;
+
+        }
+        .night .water{
+        background: repeating-radial-gradient(ellipse farthest-corner at center -400%, #7fa1bb 30%, #1d425a 90%) repeat scroll 0 0 #1d425a;
+        }
+        #switch,
+        #circle {
+        height: 30px;
+        -webkit-transition: all 0.4s cubic-bezier(0.54, 1.6, 0.5, 1);
+                transition: all 0.4s cubic-bezier(0.54, 1.6, 0.5, 1);
+        } 
+        #switch {
+        width: 60px;
+        margin: 0 auto;
+        border: 2px solid #DA8508;
+        border-radius: 27px;
+        background: #DA8508;
+        position: relative;
+        }
+        #circle {
+        margin-top: 5%;
+        margin-left: 5%;
+        width: 40%;
+        height: 80%;
+        border-radius: 50%;
+        box-shadow: 0 4px 4px rgba(26,53,71,0.25), 0 0 0 1px rgba(26,53,71,0.07);
+        background: #e9e5d5;
+        }
+        .switched {
+        border-color: #1C3958 !important;
+        background: #1C3958 !important;
+        }
+        .switched #circle {
+        margin-left: 55%;
+        background: #e9e5d5;
+        }
+
+        .nightMeme {
+        height:65%;
+        }
+
+        .night {
+        height:60%;
+            
+        }
+
+        .textBox {
+            font-family: helvetica, arial ;
+            font-size:30px;
+            font-weight:700;
+            margin:0 auto;
+            text-align:left;
+            margin-top:20%;
+            margin-left:10%;
+        }
+        
+        
+    .sectionHeader  {
+        text-align:left;
+        padding-left:5%;
+    }
+
+    #finalSlide {
+        margin-top:20%;
+    }
+
+    #linkintro1 {
+       
+        background-color: tomato;
+        /* position: absolute; */
+        border:1px solid green;
+    }
+    
+    </style>
+
+
+</head>
+<body>
+    <main>
+      
+        <section id="title">
+            <div id="fullpage">
+                <div class="section">
+                    <!-- <p id="info">Scroll down...</p> -->
+                    <div class="time-circle">
+                        <div class="sun"></div>
+                        <div class="moon">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div class="stars">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div class="water"></div>
+                    </div>
+                    <div id="intro-text">
+                        <h1 href="#">Day & Night</h1>
+                        <h4>By Bill Chuang</h4>
+                    </div>
+                    <div id="switch">
+                        <div id="circle"></div>
+                    </div>
+                </div>
+            
+            
+            <!-- <div id="titleContainer">
+                <h1>Day and Night</h1>
+                <h2>Bill Chuang</h2>
+            </div> -->
+
+            <div id="linkintro" class="link">
+                <a href="#intro"></a>
+            </div>
+        
+        </section>
+
+
+        <section id="intro">
+            <h2 class="sectionHeader">No toggle mode</h2>
+            <!-- <object id="lexus" type="text/html" data="https://www.nytimes.com/"></object> -->
+        
+            <figure class="nightMeme">
+                <img src="assets/nightdaymeme4.png" width="50%">
+                <img src="assets/nightdaymeme3.png">
+            </figure>
+            
+            <div class="textBoxNight">
+                <span>
+                    <p>NOT ABOUT TOGGLE MEMES....soz</p>
+                </span>
+            </div>
+
+        
+        </section>
+        <!-- <div class="link" id="linkintro1">
+            <a href="#intro1"></a>
+        </div> -->
+
+
+        <section id="intro1">
+            <h2 class="sectionHeader">Example 1</h2>
+            <object id="lexus" type="text/html" data="http://washingtonpost.com/#"></object>
+
+            <div id="linkBadUse" class="link">
+                <a href="#badUse1"></a>
+            </div>
+        </section>
+
+
+
+        <section id="badUse1">
+            <h2 class="sectionHeader">Example 2</h2>
+            <object id="lexus" type="text/html" data="https://www.theage.com.au/"></object>
+        
+
+            <div class="link">
+                <a href="#badUse2"></a>
+            </div>
+
+        </section>
+
+   
+        <section id="badUse2" class="link">
+            <h2 class="sectionHeader">Alternatives</h2>
+           
+                <figure class="girlWhy"><img src="assets/canunot.png"></figure>
+                <figure class="girlWhy">
+                <img src="assets/nightaddon1.png">
+                </figure>
+            </section>
+
+            <!-- <div class="textBox">
+                <span>
+                    <p>PC/MAC ACCESSIBILITY OPTIONS</p>
+                    <p>READER MODE</p>
+                </span>
+            </div> -->
+            <figure class="girlWhy">
+                <img src="assets/nightaddon2.png">
+            </figure>
+
+            <!-- <object id="lexus" type="text/html" data="http://blog.mengto.com/#"></object> -->
+
+            <!-- <div class="link">
+                <a href="#code"></a>
+            </div> -->
+        </section>
+
+
+<!-- THE CODE -->
+
+        <section id="code">
+            <h2 class="sectionHeader">The Code</h2>
+            <ul>
+                    <li>
+                         <img src="assets/simpleFunction.png" style="max-width: 80%;">
+                    </li>
+                </a>
+            </ul>
+            <div class="link">
+                <a href="#solutions"></a>
+            </div>
+        </section>
+
+
+        
+        <section id="solutions">
+            <h2 class="sectionHeader" text-transform="lower-caser">t-pain?</h2>
+
+            <ul>
+                <li>
+                    <img src="assets/tTheme.png" style="max-width: 80%;">
+                </li>
+                </a>
+            </ul>
+            <div class="link">
+                <a href="#solutions1"></a>
+            </div>
+            </section>
+
+            <section id="solutions1">
+                <h2 class="sectionHeader" text-transform="lower-caser">sessionStorage</h2>
+            
+                <ul>
+                    <li>
+                        <img src="assets/storage.png" style="max-width: 90%;">
+                    </li>
+                    </a>
+                </ul>
+                <div class="link">
+                    <a href="#solutions6"></a>
+                </div>
+            </section>
+
+
+            <!-- SESSION STOR DEMO -->
+            <section id="solutions6">
+                <h2 class="sectionHeader">Refresh-ing</h2>
+
+                <object id="lexus" type="text/html" data="https://blog.webjeda.com/demo/dark-theme-switch/"></object>
+                
+                <!-- <div id="linkBadUse" class="link">
+                    <a href="#badUse1"></a>
+                </div>
+            </section> -->
+
+
+                <div class="link">
+                    <a href="#solutions2"></a>
+                </div>
+        </section>
+
+                <!-- <div class="link">
+                    <a href="#solutions2"></a>
+                </div>
+        </section> -->
+
+
+
+        <section id="solutions2">
+            <h2 class="sectionHeader">AGAINST NIGHT MODE</h2>
+
+            <div class="textBox">
+                <span>
+                    <p>✖︎ REDESIGN</p>
+                    <p>✖︎ SUITABLE OR NOT (for reading, videos)</p>
+                    <p>✖︎ CLASHING COLORS (twitter=halloween)</p>
+                </span>
+            </div>
+
+            <div class="link">
+                <a href="#solutions3"></a>
+            </div> 
+        </section>
+
+
+        <section id="solutions3">
+            <h2 class="sectionHeader">FOR NIGHT MODE</h2>
+        
+            <div class="textBox">
+                <span>
+                    <p>✓ HEALTH (eye strain, insomnia)</p>
+                    <p>✓ CONSISTENCY (website and apps)</p>
+                    <p>✓ PERSONAL PREFERENCE</p>
+                </span>
+            </div>
+
+            <div class="link">
+                <a href="#solutions4"></a>
+            </div>
+        </section>
+
+
+        <section id="solutions4">
+            <h2 class="sectionHeader">AWAKE</h2>
+            <object id="lexus" type="text/html" data="http://www.dailyinfographic.com/when-is-the-internet-awake-infographic"></object>
+            
+            
+            <div class="link">
+                <a href="#credit"></a>
+            </div>
+        </section>
+
+
+        <section id="credit">
+            <h2 class="sectionHeader">CODEPEN CREDIT</h2>
+            <div class="textBox">
+                <span>
+                    <p>︎Jesper Christiansen (jesperkc)</p>
+                    <p>Sharath (webjeda)</p>
+                    <p>Szymon Stypa (catagen)</p>
+                </span>
+            </div>
+    
+            <div class="link">
+                <a href="#finalSlide"></a>
+            </div>
+        </section>
+            
+
+        <section id="finalSlide">
+            <h2 id="thankYou">Thank You</h2>
+        </section>
+    </main>
+
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-smooth-scroll/2.1.2/jquery.smooth-scroll.min.js"></script>
+    
+    <script>
+
+        $(function () {
+            console.log('ready ready')
+
+            $(function () {
+                $('.link a').flickity();
+                wrapAround: true
+                freeScroll: true
+                autoPlay: true
+            });
+
+            $('a').smoothScroll({
+                offset: -1
+            });
+
+            $('.main-carousel').flickity({
+                // options
+                cellAlign: 'left',
+                contain: true
+            });
+        });
+
+        $("#switch").click(function () {
+                if ($("#fullpage").hasClass("night")) {
+                    $("#fullpage").removeClass("night");
+                    $("#switch").removeClass("switched");
+                }
+                else {
+                    $("#fullpage").addClass("night");
+                    $("#switch").addClass("switched");
+
+                }
+            });
+
+    </script>
+
+    
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Night / Day Mode</title>
+    
+    <style>
+        .night {
+            background: black;
+            color: white;
+        }
+
+        .day {
+            background: white;
+            color: black;
+        }
+    </style>
+    <script>
+        function day() {
+            body.className = 'day';
+        }
+        function night() {
+            body.className = 'night';
+        }
+    </script>
+
+
+</head>
+
+<body id="body">
+    <div class="container">
+        <button type="button" onclick="night()" class="btn">NIGHT</button>
+        <button type="button" onclick="day()" class="btn">DAY</button>
+        <h3 class="text-center">NIGHT AND DAY MODE</h3>
+        <h5 class="text-center">Clik the button for changing the mode</h5>
+    </div>
+
+
+
+
+
+
+</body>
+
+</html>
+
+
